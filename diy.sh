@@ -7,6 +7,24 @@
 #=================================================
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
+#- name: Costom configure file
+#run: |
+cp -f ../mt7621_hiwifi_hc5962_spi.dts ./target/linux/ramips/dts/
+cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
+define Device/hiwifi_hc5962_spi
+  UBINIZE_OPTS := -E 5
+  IMAGE_SIZE := 16064k
+  IMAGES += factory.bin
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+  IMAGE/factory.bin := append-kernel | pad-to \$\$(KERNEL_SIZE) | append-ubi | \
+	check-size \$\$\$\$(IMAGE_SIZE)
+  DEVICE_VENDOR := HiWiFi
+  DEVICE_MODEL := HC5962
+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 wpad-openssl
+endef
+TARGET_DEVICES += hiwifi_hc5962_spi
+EOF
+sed -i 's/^[ \t]*//g' ./target/linux/ramips/image/mt7621.mk
 # 
 rm -f ./.config*
 touch ./.config
@@ -18,11 +36,10 @@ cat >> .config <<EOF
 CONFIG_TARGET_ramips=y
 CONFIG_TARGET_ramips_mt7621=y
 CONFIG_TARGET_ramips_mt7621_DEVICE_hiwifi_hc5962_spi=y
-# CONFIG_TARGET_PROFILE="DEVICE_hiwifi_hc5962_spi"
 EOF
 # 常用LuCI插件选择: 添加外面的主题和应用，包是通过diy.sh 脚本进行下载。
 cat >> .config <<EOF
-CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=n
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
 CONFIG_PACKAGE_luci-app-wol=n
 CONFIG_PACKAGE_luci-app-upnp=n
 CONFIG_PACKAGE_luci-app-accesscontrol=n
