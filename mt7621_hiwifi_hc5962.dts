@@ -44,22 +44,6 @@
 			linux,code = <KEY_RESTART>;
 		};
 	};
-
-	ubi-concat {
-		compatible = "mtd-concat";
-		devices = <&ubipart0 &ubipart1>;
-
-		partitions {
-			compatible = "fixed-partitions";
-			#address-cells = <1>;
-			#size-cells = <1>;
-
-			ubi@540000 {
-				label = "ubi";
-				reg = <0x0 0x79c0000>;
-			};
-		};
-	};
 };
 
 &spi0 {
