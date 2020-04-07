@@ -16,14 +16,15 @@ define Device/hiwifi_hc5962_spi
   IMAGE_SIZE := 16064k
   IMAGES += factory.bin
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
-  IMAGE/factory.bin := append-kernel | pad-to $$(KERNEL_SIZE) | append-ubi | \
-	check-size $$$$(IMAGE_SIZE)
+  IMAGE/factory.bin := append-kernel | pad-to \$\$(KERNEL_SIZE) | append-ubi | \
+	check-size \$\$\$\$(IMAGE_SIZE)
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5962
   DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 wpad-openssl
 endef
 TARGET_DEVICES += hiwifi_hc5962_spi
 EOF
+sed -i 's/^[ \t]*//g' ./target/linux/ramips/image/mt7621.mk
 # 
 rm -f ./.config*
 touch ./.config
@@ -72,6 +73,5 @@ EOF
 # 
 # ========================固件定制部分结束========================
 # 
-sed -i 's/^[ \t]*//g' ./target/linux/ramips/image/mt7621.mk
 sed -i 's/^[ \t]*//g' ./.config
 make defconfig
