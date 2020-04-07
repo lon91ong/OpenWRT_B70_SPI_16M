@@ -40,7 +40,6 @@ CONFIG_PACKAGE_luci-app-zerotier=n
 CONFIG_PACKAGE_luci-app-koolproxyR=y
 CONFIG_PACKAGE_luci-theme-argon=y
 EOF
-#
 # 关闭ipv6:
 cat >> .config <<EOF
 CONFIG_KERNEL_IPV6=n
@@ -49,7 +48,6 @@ CONFIG_KERNEL_IPV6_SUBTREES=n
 CONFIG_KERNEL_IPV6_MROUTE=n
 CONFIG_IPV6=n
 EOF
-#
 # 常用软件包:
 cat >> .config <<EOF
 CONFIG_PACKAGE_curl=y
