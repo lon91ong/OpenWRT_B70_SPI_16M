@@ -9,6 +9,9 @@
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 #- name: Costom configure file
 #run: |
+#rm -f ./target/linux/ramips/image/mt7621.mk
+cp -f ../mt7621.mk ./target/linux/ramips/image/mt7621.mk
+cp -f ../mt7621_hiwifi_hc5962.dts ./target/linux/ramips/dts/mt7621_hiwifi_hc5962.dts
 rm -f ./.config*
 touch ./.config
 #  chmod +x $DIY_SH
