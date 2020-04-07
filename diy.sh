@@ -9,10 +9,21 @@
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 #- name: Costom configure file
 #run: |
-rm -f ./target/linux/ramips/image/mt7621.mk
-cp -f ../mt7621.mk ./target/linux/ramips/image/mt7621.mk
-rm -f ./target/linux/ramips/dts/mt7621_hiwifi_hc5962.dts
-cp -f ../mt7621_hiwifi_hc5962.dts ./target/linux/ramips/dts/mt7621_hiwifi_hc5962.dts
+cp -f ../mt7621_hiwifi_hc5962_spi.dts ./target/linux/ramips/dts/
+cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
+define Device/hiwifi_hc5962_spi
+  UBINIZE_OPTS := -E 5
+  IMAGE_SIZE := 16064k
+  IMAGES += factory.bin
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+  IMAGE/factory.bin := append-kernel | pad-to $$(KERNEL_SIZE) | append-ubi | \
+	check-size $$$$(IMAGE_SIZE)
+  DEVICE_VENDOR := HiWiFi
+  DEVICE_MODEL := HC5962
+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 wpad-openssl
+endef
+TARGET_DEVICES += hiwifi_hc5962_spi
+EOF
 rm -f ./.config*
 touch ./.config
 #
@@ -22,8 +33,8 @@ touch ./.config
 cat >> .config <<EOF
 CONFIG_TARGET_ramips=y
 CONFIG_TARGET_ramips_mt7621=y
-CONFIG_TARGET_ramips_mt7621_DEVICE_hiwifi_hc5962=y
-CONFIG_TARGET_PROFILE="DEVICE_hiwifi_hc5962"
+CONFIG_TARGET_ramips_mt7621_DEVICE_hiwifi_hc5962_spi=y
+CONFIG_TARGET_PROFILE="DEVICE_hiwifi_hc5962_spi"
 EOF
 # 常用LuCI插件选择: 添加外面的主题和应用，包是通过diy.sh 脚本进行下载。
 cat >> .config <<EOF
