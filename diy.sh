@@ -24,6 +24,8 @@ define Device/hiwifi_hc5962_spi
 endef
 TARGET_DEVICES += hiwifi_hc5962_spi
 EOF
+sed -i 's/^[ \t]*//g' ./target/linux/ramips/image/mt7621.mk
+#
 rm -f ./.config*
 touch ./.config
 #
