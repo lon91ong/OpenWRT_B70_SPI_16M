@@ -24,13 +24,12 @@ define Device/hiwifi_hc5962_spi
 endef
 TARGET_DEVICES += hiwifi_hc5962_spi
 EOF
-sed -i 's/^[ \t]*//g' ./target/linux/ramips/image/mt7621.mk
-#
+# 
 rm -f ./.config*
 touch ./.config
-#
+# 
 # ========================固件定制部分========================
-#
+# 
 # 编译极路由B70固件:
 cat >> .config <<EOF
 CONFIG_TARGET_ramips=y
@@ -70,8 +69,9 @@ CONFIG_PACKAGE_tree=y
 CONFIG_PACKAGE_vim-fuller=y
 CONFIG_PACKAGE_wget=y
 EOF
-#
+# 
 # ========================固件定制部分结束========================
 # 
+sed -i 's/^[ \t]*//g' ./target/linux/ramips/image/mt7621.mk
 sed -i 's/^[ \t]*//g' ./.config
 make defconfig
