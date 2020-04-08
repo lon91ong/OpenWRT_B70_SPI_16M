@@ -47,7 +47,6 @@ CONFIG_PACKAGE_luci-app-vlmcsd=n
 CONFIG_PACKAGE_luci-app-zerotier=n
 CONFIG_PACKAGE_luci-app-koolproxyR=y
 CONFIG_PACKAGE_luci-app-samba=y
-CONFIG_PACKAGE_luci-app-samba4=y
 CONFIG_PACKAGE_luci-theme-argon=y
 EOF
 # 关闭ipv6:
