@@ -9,20 +9,16 @@
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 #- name: Costom configure file
 #run: |
-cp -f ../mt7621_hiwifi_hc5962_spi.dts ./target/linux/ramips/dts/
+cp -f ../mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
-define Device/hiwifi_hc5962_spi
-  UBINIZE_OPTS := -E 5
+define Device/hiwifi_hc5962-spi
   IMAGE_SIZE := 16064k
-  IMAGES += factory.bin
-  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
-  IMAGE/factory.bin := append-kernel | pad-to \$\$(KERNEL_SIZE) | append-ubi | \
-	check-size \$\$\$\$(IMAGE_SIZE)
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5962
-  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 wpad-openssl
+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 kmod-sdhci-mt7620 \
+	kmod-usb-ledtrig-usbport wpad-openssl
 endef
-TARGET_DEVICES += hiwifi_hc5962_spi
+TARGET_DEVICES += hiwifi_hc5962-spi
 EOF
 sed -i 's/^[ \t]*//g' ./target/linux/ramips/image/mt7621.mk
 # 
