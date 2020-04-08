@@ -21,8 +21,15 @@ Build OpenWrt using GitHub Actions
 - 硬改SPI闪存后的硬件规格和youku-L2以及newifi-D1相近, 主要参考两者的dts文件配置来拼凑.
 - 通过Star出发Action实现云端编译.
 - [无线中继问题参考](https://www.right.com.cn/forum/thread-314109-1-1.html)
-- When the build is complete, click the `Artifacts` button in the upper right corner of the Actions page to download the binaries.
 
+### SmartDNS
+
+服务可以通过页面的软件包列表找到，界面通过下面的命令安装
+```
+cd /tmp
+wget https://github.com/pymumu/smartdns/releases/download/Release30/luci-app-smartdns.1.2020.02.25-2212.all-luci-all.ipk
+opkg install luci-app-smartdns.1.2020.02.25-2212.all-luci-all.ipk
+```
 
 
 ## License
