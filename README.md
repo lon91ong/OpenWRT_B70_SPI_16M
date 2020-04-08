@@ -29,6 +29,9 @@ Build OpenWrt using GitHub Actions
 cd /tmp
 wget https://github.com/pymumu/smartdns/releases/download/Release30/luci-app-smartdns.1.2020.02.25-2212.all-luci-all.ipk
 opkg install luci-app-smartdns.1.2020.02.25-2212.all-luci-all.ipk
+
+opkg remove luci-app-smartdns
+opkg remove smartdns
 ```
 
 
