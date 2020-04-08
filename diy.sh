@@ -31,7 +31,7 @@ touch ./.config
 cat >> .config <<EOF
 CONFIG_TARGET_ramips=y
 CONFIG_TARGET_ramips_mt7621=y
-CONFIG_TARGET_ramips_mt7621_DEVICE_hiwifi_hc5962_spi=y
+CONFIG_TARGET_ramips_mt7621_DEVICE_hiwifi_hc5962-spi=y
 EOF
 # 常用LuCI插件选择: 添加外面的主题和应用，包是通过diy.sh 脚本进行下载。
 cat >> .config <<EOF
