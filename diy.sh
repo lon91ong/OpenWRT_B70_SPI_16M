@@ -9,6 +9,8 @@
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 #- name: Costom configure file
 #run: |
+rm -f ./package/system/fstools/files/mount.hotplug
+cp -f ../mount.hotplug ./package/system/fstools/files/
 cp -f ../mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
 define Device/hiwifi_hc5962-spi
