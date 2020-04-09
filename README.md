@@ -25,15 +25,29 @@ Build OpenWrt using GitHub Actions
 
 ### SmartDNS
 
-服务可以通过页面的软件包列表找到，界面通过下面的命令安装
+服务可以通过页面的软件包列表找到，luci界面通过下面的命令安装
+ - 注意有两个luci-app-smartdns*.ipk, 都要用到，直接安装无compat的会出现下面的错误，只能重新刷固件才能恢复
+
+```
+/usr/lib/lua/luci/controller/smartdns.lua:25: attempt to call global 'view' (a nil value)
+stack traceback:
+	/usr/lib/lua/luci/controller/smartdns.lua:25: in function 't'
+	/usr/lib/lua/luci/dispatcher.lua:465: in function 'createtree'
+	/usr/lib/lua/luci/dispatcher.lua:188: in function 'dispatch'
+	/usr/lib/lua/luci/dispatcher.lua:95: in function </usr/lib/lua/luci/dispatcher.lua:94>
+```
+正确的安装步骤是，先装compat版，会有错误提示：uci: Entry not found，忽略继续装另一个版本即可。
 ```
 cd /tmp
+wget https://github.com/pymumu/smartdns/releases/download/Release30/luci-app-smartdns.1.2020.02.25-2212.all-luci-compat-all.ipk
+opkg install luci-app-smartdns.1.2020.02.25-2212.all-luci-compat-all.ipk
+# 这里会提示 uci: Entry not found 错误，继续...
 wget https://github.com/pymumu/smartdns/releases/download/Release30/luci-app-smartdns.1.2020.02.25-2212.all-luci-all.ipk
 opkg install luci-app-smartdns.1.2020.02.25-2212.all-luci-all.ipk
+#安装完成
 
-# 卸载
+# 卸载时用到的命令
 opkg remove luci-app-smartdns
-opkg remove smartdns
 ```
 
 
