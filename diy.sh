@@ -34,6 +34,9 @@ cat >> .config <<EOF
 CONFIG_TARGET_ramips=y
 CONFIG_TARGET_ramips_mt7621=y
 CONFIG_TARGET_ramips_mt7621_DEVICE_hiwifi_hc5962-spi=y
+CONFIG_TARGET_PREINIT_IP="192.168.29.1"
+CONFIG_TARGET_PREINIT_NETMASK="255.255.255.0"
+CONFIG_TARGET_PREINIT_BROADCAST="192.168.29.255"
 EOF
 # 常用LuCI插件选择: 添加外面的主题和应用，包是通过diy.sh 脚本进行下载。
 cat >> .config <<EOF
@@ -73,8 +76,6 @@ CONFIG_PACKAGE_tree=y
 CONFIG_PACKAGE_vim-fuller=y
 CONFIG_PACKAGE_wget=y
 EOF
-# 
 # ========================固件定制部分结束========================
-# 
 sed -i 's/^[ \t]*//g' ./.config
 make defconfig
