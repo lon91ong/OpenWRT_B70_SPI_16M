@@ -36,7 +36,7 @@ stack traceback:
 	/usr/lib/lua/luci/dispatcher.lua:188: in function 'dispatch'
 	/usr/lib/lua/luci/dispatcher.lua:95: in function </usr/lib/lua/luci/dispatcher.lua:94>
 ```
-正确的安装步骤是，先装compat版，会有错误提示：uci: Entry not found，忽略继续装另一个版本即可。
+ - 正确的安装步骤是，先装compat版，会有错误提示：uci: Entry not found，忽略继续装另一个版本即可。
 ```
 cd /tmp
 wget https://github.com/pymumu/smartdns/releases/download/Release30/luci-app-smartdns.1.2020.02.25-2212.all-luci-compat-all.ipk
