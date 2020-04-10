@@ -22,6 +22,7 @@ Build OpenWrt using GitHub Actions
 - 通过Star出发Action实现云端编译.
 - [无线中继问题参考](https://www.right.com.cn/forum/thread-314109-1-1.html)
 - U盘中文乱码[参考1](https://www.right.com.cn/forum/thread-248712-1-1.html), [参考2](https://www.right.com.cn/forum/thread-208227-1-1.html), [#2136](https://github.com/coolsnowwolf/lede/issues/2136)
+- [解决openwrt页面升级中“不支持所上传的文件格式”问题](https://blog.csdn.net/KOBE_ZERO/article/details/51333508)
 
 ### SmartDNS
 
