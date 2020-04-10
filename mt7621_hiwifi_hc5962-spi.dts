@@ -7,7 +7,7 @@
 
 / {
 	compatible = "hiwifi,hc5962", "mediatek,mt7621-soc";
-	model = "Mediatek MT7621 evaluation board";
+	model = "HiWiFi HC5962";
 
 	aliases {
 		led-boot = &led_system;
