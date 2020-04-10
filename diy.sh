@@ -64,9 +64,13 @@ EOF
 #EOF
 # V2Ray Configuration
 cat >> .config <<EOF
+CONFIG_PACKAGE_shadowsocks-libev-ss-local=n
+CONFIG_PACKAGE_shadowsocks-libev-ss-redir=n
+CONFIG_PACKAGE_shadowsocksr-libev-alt=n
+CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=n
 CONFIG_PACKAGE_v2ray=y
-CONFIG_PACKAGE_v2ray-plugin=n
-CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=n
+CONFIG_PACKAGE_v2ray-plugin=y
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
 CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
 # CONFIG_V2RAY_COMPRESS_GOPROXY is not set
 # CONFIG_V2RAY_JSON_V2CTL is not set
