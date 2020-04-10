@@ -39,18 +39,17 @@ CONFIG_TARGET_ramips_mt7621_DEVICE_hiwifi_hc5962-spi=y
 EOF
 # 常用LuCI插件选择: 添加外面的主题和应用，包是通过diy.sh 脚本进行下载。
 cat >> .config <<EOF
-CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=n
 CONFIG_PACKAGE_luci-app-wol=n
-CONFIG_PACKAGE_luci-app-upnp=n
+CONFIG_PACKAGE_luci-app-upnp=y
 CONFIG_PACKAGE_luci-app-accesscontrol=n
-CONFIG_PACKAGE_luci-app-ddns=n
-CONFIG_PACKAGE_luci-app-filetransfer=n
+CONFIG_PACKAGE_luci-app-ddns=y
+CONFIG_PACKAGE_luci-app-filetransfer=y
 CONFIG_PACKAGE_luci-app-unblockmusic=n
 CONFIG_PACKAGE_luci-app-unblockneteasemusic-mini=n
-CONFIG_PACKAGE_luci-app-vsftpd=n
+CONFIG_PACKAGE_luci-app-vsftpd=y
 CONFIG_PACKAGE_luci-app-vlmcsd=n
 CONFIG_PACKAGE_luci-app-zerotier=n
-CONFIG_PACKAGE_luci-app-koolproxyR=n
+CONFIG_PACKAGE_luci-app-koolproxyR=y
 CONFIG_PACKAGE_luci-app-samba=y
 CONFIG_PACKAGE_luci-theme-argon=y
 EOF
@@ -62,31 +61,24 @@ EOF
 #CONFIG_KERNEL_IPV6_MROUTE=n
 #CONFIG_IPV6=n
 #EOF
-# V2Ray Configuration
+# SSR Configuration
 cat >> .config <<EOF
+CONFIG_PACKAGE_luci-app-ssr-plus=n
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=n
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=n
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=n
+CONFIG_PACKAGE_luci-app-ssrserver-python=n
 CONFIG_PACKAGE_shadowsocks-libev-ss-local=n
 CONFIG_PACKAGE_shadowsocks-libev-ss-redir=n
 CONFIG_PACKAGE_shadowsocksr-libev-alt=n
 CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=n
-CONFIG_PACKAGE_v2ray=y
-CONFIG_PACKAGE_v2ray-plugin=y
-CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
-CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
-# CONFIG_V2RAY_COMPRESS_GOPROXY is not set
-# CONFIG_V2RAY_JSON_V2CTL is not set
-CONFIG_V2RAY_JSON_INTERNAL=y
-# CONFIG_V2RAY_JSON_NONE is not set
-CONFIG_V2RAY_EXCLUDE_V2CTL=y
-CONFIG_V2RAY_EXCLUDE_ASSETS=y
-CONFIG_V2RAY_COMPRESS_UPX=y
-CONFIG_V2RAY_DISABLE_NONE=y
 EOF
 # 常用软件包:
 cat >> .config <<EOF
 CONFIG_PACKAGE_mount-utils=n
 CONFIG_PACKAGE_automount=y
-CONFIG_PACKAGE_autosamba=n
-CONFIG_PACKAGE_kmod-fs-ext4=n
+CONFIG_PACKAGE_autosamba=y
+CONFIG_PACKAGE_kmod-fs-ext4=y
 CONFIG_PACKAGE_curl=y
 CONFIG_PACKAGE_htop=y
 CONFIG_PACKAGE_screen=y
