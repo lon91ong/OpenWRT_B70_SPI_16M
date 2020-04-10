@@ -7,6 +7,8 @@
 #=================================================
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.77.1/g' package/base-files/files/bin/config_generate
+# Web sysupgrade Fix
+sed -i '/^.*hc5962.*/d' target/linux/ramips/mt7621/base-files/lib/upgrade/platform.sh
 #- name: Costom configure file
 #run: |
 rm -f ./package/system/fstools/files/mount.hotplug
