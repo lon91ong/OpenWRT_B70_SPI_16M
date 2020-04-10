@@ -40,7 +40,7 @@ CONFIG_TARGET_PREINIT_BROADCAST="192.168.29.255"
 EOF
 # 常用LuCI插件选择: 添加外面的主题和应用，包是通过diy.sh 脚本进行下载。
 cat >> .config <<EOF
-CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=n
 CONFIG_PACKAGE_luci-app-wol=n
 CONFIG_PACKAGE_luci-app-upnp=n
 CONFIG_PACKAGE_luci-app-accesscontrol=n
@@ -66,6 +66,9 @@ EOF
 # V2Ray Configuration
 cat >> .config <<EOF
 CONFIG_PACKAGE_v2ray=y
+CONFIG_PACKAGE_v2ray-plugin=y
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
 # CONFIG_V2RAY_COMPRESS_GOPROXY is not set
 # CONFIG_V2RAY_JSON_V2CTL is not set
 CONFIG_V2RAY_JSON_INTERNAL=y
