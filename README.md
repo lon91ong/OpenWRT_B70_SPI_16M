@@ -80,10 +80,10 @@ dd if=/dev/mtd8 of=/tmp/backup.bin
 ...
 # 刷写breed
 mtd write breed-mt7621-youku-l2.bin u-boot
-# 刷写固件
-mtd write openwrt-ramips-mt7621-hiwifi_hc5962-spi-squashfs-sysupgrade.bin firmware
 # 擦除固件备份，不然重启会被覆盖回去
 mtd erase firmware_backup
+# 刷写固件，需要自动重启用`mtd -r write ...`, 成功执行完命令后自动重启
+mtd write openwrt-ramips-mt7621-hiwifi_hc5962-spi-squashfs-sysupgrade.bin firmware
 ```
 ### SmartDNS
 
