@@ -43,7 +43,7 @@ Build OpenWrt using GitHub Actions
 -l | –list-backup
 列出 -b 命令将备份的文件列表，但不创建备份文件
 # 实用实例：
-sysupgrade -v /tmp/openwrt-ramips-mt7621-hiwifi_hc5962-spi-squashfs-sysupgrade.bin  # 保留配置升级
+sysupgrade -v -F /tmp/openwrt-ramips-mt7621-hiwifi_hc5962-spi-squashfs-sysupgrade.bin  # 保留配置,强制升级
 sysupgrade -n -v /tmp/openwrt-ramips-mt7621-hiwifi_hc5962-spi-squashfs-sysupgrade.bin  # 干净升级
 ```
 
