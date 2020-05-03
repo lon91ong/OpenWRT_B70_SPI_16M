@@ -85,6 +85,16 @@ mtd erase firmware_backup
 # 刷写固件，需要自动重启用`mtd -r write ...`, 成功执行完命令后自动重启
 mtd write openwrt-ramips-mt7621-hiwifi_hc5962-spi-squashfs-sysupgrade.bin firmware
 ```
+如果路由器配置被你完全搞乱了，但是还能启动并且可以连上SSH，那么按照下面来备份：
+
+仅对 /overlay 打包备份即可: `tar -czvf /tmp/overlay_backup.tar.gz /overlay`
+需要恢复的时候将 overlay_backup.tar.gz 上传至 /tmp ，然后清空 /overlay 并恢复备份：
+```
+rm -rvf /overlay/* 
+cd /
+tar -xzvf /tmp/overlay_backup.tar.gz
+```
+
 ### SmartDNS
 
 [LEDE项目大佬对smartdns的态度](https://github.com/coolsnowwolf/lede/issues/2551)
