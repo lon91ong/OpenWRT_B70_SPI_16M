@@ -88,6 +88,7 @@ mtd write openwrt-ramips-mt7621-hiwifi_hc5962-spi-squashfs-sysupgrade.bin firmwa
 如果路由器配置被你完全搞乱了，但是还能启动并且可以连上SSH，那么按照下面来备份：
 
 仅对 /overlay 打包备份即可: `tar -czvf /tmp/overlay_backup.tar.gz /overlay`
+
 需要恢复的时候将 overlay_backup.tar.gz 上传至 /tmp ，然后清空 /overlay 并恢复备份：
 ```
 rm -rvf /overlay/* 
