@@ -11,8 +11,8 @@ sed -i 's/192.168.1.1/192.168.77.1/g' package/base-files/files/bin/config_genera
 sed -i '/^.*hc5962.*/d' target/linux/ramips/mt7621/base-files/lib/upgrade/platform.sh
 #- name: Costom configure file
 #run: |
-rm -f ./package/system/fstools/files/mount.hotplug
-cp -f ../mount.hotplug ./package/system/fstools/files/
+#rm -f ./package/system/fstools/files/mount.hotplug
+#cp -f ../mount.hotplug ./package/system/fstools/files/
 cp -f ../mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
 define Device/hiwifi_hc5962-spi
