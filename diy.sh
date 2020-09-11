@@ -12,8 +12,8 @@ sed -i '/^.*hc5962.*/d' target/linux/ramips/mt7621/base-files/lib/upgrade/platfo
 #- name: Costom configure file
 #run: |
 #rm -f ./package/system/fstools/files/mount.hotplug
-#cp -f ../mount.hotplug ./package/system/fstools/files/
-cp -f ../mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
+#cp -f $GITHUB_WORKSPACE/mount.hotplug ./package/system/fstools/files/
+cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
 define Device/hiwifi_hc5962-spi
   IMAGE_SIZE := 16064k
