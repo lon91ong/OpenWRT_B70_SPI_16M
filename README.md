@@ -57,21 +57,21 @@ root@Hiwifi:/tmp# cat /proc/mtd     # 查看原固件信息
     mtd0: 00080000 00020000 "u-boot"
     mtd1: 00080000 00020000 "debug"
     mtd2: 00040000 00020000 "Factory"
-    mtd3: 02000000 00020000"firmware"
+    mtd3: 02000000 00020000 "firmware"
     mtd4: 00180000 00020000 "kernel"
     mtd5: 01e80000 00020000 "rootfs"
-    mtd6: 00080000 00020000"hw_panic"
+    mtd6: 00080000 00020000 "hw_panic"
     mtd7: 00080000 00020000 "bdinfo"
     mtd8: 00080000 00020000 "backup"
     mtd9: 01000000 00020000 "overlay"
-    mtd10: 02000000 00020000"firmware_backup"
+    mtd10: 02000000 00020000 "firmware_backup"
     mtd11: 00200000 00020000 "oem"
     mtd12: 02ac0000 00020000 "opt"
 # 备份原固件各分区到tmp目录下，挂*必备
-dd if=/dev/mtd0 of=/tmp/u-boot.bin  *
+dd if=/dev/mtd0 of=/tmp/u-boot.bin *
 dd if=/dev/mtd1 of=/tmp/debug.bin
-dd if=/dev/mtd2 of=/tmp/Factory.bin  *
-dd if=/dev/mtd3 of=/tmp/firmware.bin  *
+dd if=/dev/mtd2 of=/tmp/Factory.bin *
+dd if=/dev/mtd3 of=/tmp/firmware.bin *
 dd if=/dev/mtd4 of=/tmp/kernel.bin
 dd if=/dev/mtd5 of=/tmp/rootfs.bin
 dd if=/dev/mtd6 of=/tmp/hw_panic.bin
