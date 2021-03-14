@@ -1,0 +1,16 @@
+/dts-v1/;
+
+#include "mt7621_hiwifi_hc5962-spi.dts"
+
+/ {
+	compatible = "hiwifi,hc5962-32m", "mediatek,mt7621-soc";
+	model = "HiWiFi HC5962 (32M)";
+};
+
+&firmware {
+	reg = <0x50000 0x1f60000>;
+};
+
+&flash {
+	broken-flash-reset;
+};
