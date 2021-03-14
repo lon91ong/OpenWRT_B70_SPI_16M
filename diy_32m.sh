@@ -13,7 +13,7 @@ sed -i '/^.*hc5962.*/d' target/linux/ramips/mt7621/base-files/lib/upgrade/platfo
 #run: |
 #rm -f ./package/system/fstools/files/mount.hotplug
 #cp -f $GITHUB_WORKSPACE/mount.hotplug ./package/system/fstools/files/
-cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962-spi-32M.dts ./target/linux/ramips/dts/
+cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962-spi-32m.dts ./target/linux/ramips/dts/
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
 define Device/hiwifi_hc5962-spi-32m
   IMAGE_SIZE := 32128k
