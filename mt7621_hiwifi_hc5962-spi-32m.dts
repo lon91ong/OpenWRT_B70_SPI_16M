@@ -44,6 +44,21 @@
 			linux,code = <KEY_RESTART>;
 		};
 	};
+	ubi-concat {
+		compatible = "mtd-concat";
+		devices = <&ubipart0 &ubipart1>;
+
+		partitions {
+			compatible = "fixed-partitions";
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			partition@340000 {
+				label = "ubi";
+				reg = <0x340000 0x4d00000>;
+			};
+		};
+	};
 };
 
 &spi0 {
@@ -51,9 +66,11 @@
 
 	flash: flash@0 {
 		compatible = "jedec,spi-nor";
-		broken-flash-reset;
 		reg = <0>;
-		spi-max-frequency = <50000000>;
+		spi-max-frequency = <25000000>;
+		broken-flash-reset;
+		m25p,fast-read;
+		broken-flash-reset;
 
 		partitions {
 			compatible = "fixed-partitions";
