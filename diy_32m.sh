@@ -19,14 +19,14 @@ sed -i 's/hc5962/hc5962|\\\n\thiwifi,hc5962-spi/g' target/linux/ramips/mt7621/ba
 #sed -i 's/5.4/4.14/g' target/linux/ramips/Makefile
 #sed -i 's/5.4/4.14/g' target/linux/ramips/image/mt7621.mk
 # 内核5.4配置32M闪存, 参考https://github.com/coolsnowwolf/lede/issues/5113
-sed -i '/spi-max-frequency/a\\t\tbroken-flash-reset;' target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
+#sed -i '/spi-max-frequency/a\\t\tbroken-flash-reset;' target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
 sed -i 's/<0x50000 0xf60000>/<0x50000 0x1fb0000>/g' target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
 #sed -i 's/16064k/32128k/g' target/linux/ramips/image/mt7621.mk
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
 define Device/hiwifi_hc5962-spi
   IMAGE_SIZE := 32128k
   DEVICE_VENDOR := HiWiFi
-  DEVICE_MODEL := HC5962
+  DEVICE_MODEL := HC5962-SPI
   DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 kmod-sdhci-mt7620 \
 	kmod-usb-ledtrig-usbport wpad-openssl
 endef
