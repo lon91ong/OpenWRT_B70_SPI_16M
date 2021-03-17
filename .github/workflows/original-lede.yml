@@ -23,7 +23,7 @@ on:
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/openwrt
-  REPO_BRANCH: master
+  REPO_BRANCH: lede-17.01
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
   DIY_FEED: diy_feed.sh
