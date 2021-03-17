@@ -16,8 +16,8 @@ sed -i '/^.*hc5962.*/d' target/linux/ramips/mt7621/base-files/lib/upgrade/platfo
 cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
 sed -i 's/hc5962/hc5962|\\\n\thiwifi,hc5962-spi/g' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 # 内核版本选4.14
-sed -i 's/5.4/4.14/g' target/linux/ramips/Makefile
-sed -i 's/5.4/4.14/g' target/linux/ramips/image/mt7621.mk
+#sed -i 's/5.4/4.14/g' target/linux/ramips/Makefile
+#sed -i 's/5.4/4.14/g' target/linux/ramips/image/mt7621.mk
 # 内核5.4配置32M闪存, 参考https://github.com/coolsnowwolf/lede/issues/5113
 sed -i '/spi-max-frequency/a\\t\tbroken-flash-reset;' target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
 sed -i 's/<0x50000 0xf60000>/<0x50000 0x1fb0000>/g' target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
