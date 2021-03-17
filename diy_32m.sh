@@ -26,7 +26,7 @@ cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
 define Device/hiwifi_hc5962-spi
   IMAGE_SIZE := 32128k
   DEVICE_VENDOR := HiWiFi
-  DEVICE_MODEL := HC5962-SPI
+  DEVICE_MODEL := HC5962
   DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 kmod-sdhci-mt7620 \
 	kmod-usb-ledtrig-usbport wpad-openssl
 endef
