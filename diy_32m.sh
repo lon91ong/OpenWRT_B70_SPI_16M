@@ -14,6 +14,7 @@ sed -i '/^.*hc5962.*/d' target/linux/ramips/mt7621/base-files/lib/upgrade/platfo
 #rm -f ./package/system/fstools/files/mount.hotplug
 #cp -f $GITHUB_WORKSPACE/mount.hotplug ./package/system/fstools/files/
 cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
+sed -i 's/hc5962/hc5962|\\\n\thiwifi,hc5962-spi/g' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 # 内核版本选4.14
 sed -i 's/5.4/4.14/g' target/linux/ramips/Makefile
 sed -i 's/5.4/4.14/g' target/linux/ramips/image/mt7621.mk
