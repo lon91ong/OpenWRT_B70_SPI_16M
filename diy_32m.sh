@@ -35,8 +35,7 @@ EOF
 sed -i 's/^[ \t]*//g' ./target/linux/ramips/image/mt7621.mk
 # 
 rm -f ./.config*
-#touch ./.config
-cp -f $GITHUB_WORKSPACE/config-4.14 ./.config
+touch ./.config
 # 
 # ========================固件定制部分========================
 # 
