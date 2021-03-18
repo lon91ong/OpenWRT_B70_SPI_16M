@@ -72,15 +72,15 @@ EOF
 #EOF
 # SSR Configuration
 cat >> .config <<EOF
-CONFIG_PACKAGE_luci-app-ssr-plus=n
-CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=n
-CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=n
-CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=n
-CONFIG_PACKAGE_luci-app-ssrserver-python=n
-CONFIG_PACKAGE_shadowsocks-libev-ss-local=n
-CONFIG_PACKAGE_shadowsocks-libev-ss-redir=n
-CONFIG_PACKAGE_shadowsocksr-libev-alt=n
-CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=n
+CONFIG_PACKAGE_luci-app-ssr-plus=y
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
+CONFIG_PACKAGE_luci-app-ssrserver-python=y
+CONFIG_PACKAGE_shadowsocks-libev-ss-local=y
+CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y
+CONFIG_PACKAGE_shadowsocksr-libev-alt=y
+CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y
 EOF
 # 常用软件包:
 cat >> .config <<EOF
