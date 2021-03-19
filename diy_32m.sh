@@ -13,24 +13,23 @@ sed -i '/^.*hc5962.*/d' ./target/linux/ramips/mt7621/base-files/lib/upgrade/plat
 #run: |
 #rm -f ./package/system/fstools/files/mount.hotplug
 #cp -f $GITHUB_WORKSPACE/mount.hotplug ./package/system/fstools/files/
-rm -f ./target/linux/ramips/dts/mt7621_hiwifi_hc5962.dts
-cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962.dts ./target/linux/ramips/dts/
+cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
 # 内核版本选4.14
 #sed -i 's/5.4/4.14/g' target/linux/ramips/Makefile
 #sed -i 's/5.4/4.14/g' target/linux/ramips/image/mt7621.mk
 # 内核5.4配置32M闪存, 参考https://github.com/coolsnowwolf/lede/issues/5113
 #sed -i '/spi-max-frequency/a\\t\tbroken-flash-reset;' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962.dts
-sed -i 's/<0x50000 0xfb0000>/<0x50000 0x1fb0000>/g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962.dts
-sed -i 's/<&gpio/<\&gpio0/g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962.dts
+sed -i 's/<0x50000 0xfb0000>/<0x50000 0x1fb0000>/g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
+sed -i 's/<&gpio/<\&gpio0/g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
 sed -i 's/hc5962/&-nand/g' ./target/linux/ramips/image/mt7621.mk
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
-define Device/hiwifi_hc5962
+define Device/hiwifi_hc5962-spi
   IMAGE_SIZE := 32128k
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5962
   DEVICE_PACKAGES := mod-mt7603 kmod-mt76x2 kmod-usb3 wpad-openssl
 endef
-TARGET_DEVICES += hiwifi_hc5962
+TARGET_DEVICES += hiwifi_hc5962-spi
 EOF
 sed -i 's/^[ \t]*//g' ./target/linux/ramips/image/mt7621.mk
 # 
@@ -43,21 +42,20 @@ touch ./.config
 cat >> .config <<EOF
 CONFIG_TARGET_ramips=y
 CONFIG_TARGET_ramips_mt7621=y
-CONFIG_TARGET_ramips_mt7621_DEVICE_hiwifi_hc5962=y
+CONFIG_TARGET_ramips_mt7621_DEVICE_hiwifi_hc5962-spi=y
 EOF
 # 常用LuCI插件选择: 添加外面的主题和应用，包是通过diy.sh 脚本进行下载。
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-wol=n
 CONFIG_PACKAGE_luci-app-upnp=y
 CONFIG_PACKAGE_luci-app-accesscontrol=n
+CONFIG_PACKAGE_luci-app-cifs-mount=y
 CONFIG_PACKAGE_luci-app-filetransfer=y
 CONFIG_PACKAGE_luci-app-unblockmusic=n
 CONFIG_PACKAGE_luci-app-unblockneteasemusic-mini=n
 CONFIG_PACKAGE_luci-app-vsftpd=y
 CONFIG_PACKAGE_luci-app-vlmcsd=n
 CONFIG_PACKAGE_luci-app-zerotier=n
-CONFIG_PACKAGE_luci-app-koolproxyR=y
-CONFIG_PACKAGE_luci-app-samba=y
 EOF
 # 关闭ipv6:
 #cat >> .config <<EOF
@@ -83,7 +81,6 @@ EOF
 cat >> .config <<EOF
 CONFIG_PACKAGE_mount-utils=n
 CONFIG_PACKAGE_automount=y
-CONFIG_PACKAGE_autosamba=y
 CONFIG_PACKAGE_kmod-fs-ext4=y
 CONFIG_PACKAGE_curl=y
 CONFIG_PACKAGE_htop=y
