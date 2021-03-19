@@ -60,7 +60,6 @@ CONFIG_PACKAGE_luci-app-vlmcsd=n
 CONFIG_PACKAGE_luci-app-zerotier=n
 CONFIG_PACKAGE_luci-app-koolproxyR=y
 CONFIG_PACKAGE_luci-app-samba=y
-CONFIG_PACKAGE_luci-theme-argon=y
 EOF
 # 关闭ipv6:
 #cat >> .config <<EOF
@@ -97,4 +96,6 @@ CONFIG_PACKAGE_wget=y
 EOF
 # ========================固件定制部分结束========================
 sed -i 's/^[ \t]*//g' ./.config
+# 修改默认主题
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
 make defconfig
