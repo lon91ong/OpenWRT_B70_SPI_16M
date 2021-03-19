@@ -13,16 +13,15 @@ sed -i '/^.*hc5962.*/d' target/linux/ramips/mt7621/base-files/lib/upgrade/platfo
 #run: |
 #rm -f ./package/system/fstools/files/mount.hotplug
 #cp -f $GITHUB_WORKSPACE/mount.hotplug ./package/system/fstools/files/
-rm -f ./target/linux/ramips/dts/mt7621_hiwifi_hc5962.dts
-cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962.dts ./target/linux/ramips/dts/
+cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
-define Device/hiwifi_hc5962
+define Device/hiwifi_hc5962-spi
   IMAGE_SIZE := 16064k
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5962
   DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 wpad-openssl
 endef
-TARGET_DEVICES += hiwifi_hc5962
+TARGET_DEVICES += hiwifi_hc5962-spi
 EOF
 sed -i 's/^[ \t]*//g' ./target/linux/ramips/image/mt7621.mk
 # 
@@ -35,22 +34,20 @@ touch ./.config
 cat >> .config <<EOF
 CONFIG_TARGET_ramips=y
 CONFIG_TARGET_ramips_mt7621=y
-CONFIG_TARGET_ramips_mt7621_DEVICE_hiwifi_hc5962=y
+CONFIG_TARGET_ramips_mt7621_DEVICE_hiwifi_hc5962-spi=y
 EOF
 # 常用LuCI插件选择: 添加外面的主题和应用，包是通过diy.sh 脚本进行下载。
 cat >> .config <<EOF
 CONFIG_PACKAGE_luci-app-wol=n
 CONFIG_PACKAGE_luci-app-upnp=y
 CONFIG_PACKAGE_luci-app-accesscontrol=n
+CONFIG_PACKAGE_luci-app-cifs-mount=y
 CONFIG_PACKAGE_luci-app-filetransfer=y
 CONFIG_PACKAGE_luci-app-unblockmusic=n
 CONFIG_PACKAGE_luci-app-unblockneteasemusic-mini=n
 CONFIG_PACKAGE_luci-app-vsftpd=y
 CONFIG_PACKAGE_luci-app-vlmcsd=n
 CONFIG_PACKAGE_luci-app-zerotier=n
-CONFIG_PACKAGE_luci-app-koolproxyR=y
-CONFIG_PACKAGE_luci-app-samba=y
-CONFIG_PACKAGE_luci-theme-argon=y
 EOF
 # 关闭ipv6:
 #cat >> .config <<EOF
@@ -76,7 +73,6 @@ EOF
 cat >> .config <<EOF
 CONFIG_PACKAGE_mount-utils=n
 CONFIG_PACKAGE_automount=y
-CONFIG_PACKAGE_autosamba=y
 CONFIG_PACKAGE_kmod-fs-ext4=y
 CONFIG_PACKAGE_curl=y
 CONFIG_PACKAGE_htop=y
