@@ -44,21 +44,6 @@
 			linux,code = <KEY_RESTART>;
 		};
 	};
-	ubi-concat {
-		compatible = "mtd-concat";
-		devices = <&ubipart0 &ubipart1>;
-
-		partitions {
-			compatible = "fixed-partitions";
-			#address-cells = <1>;
-			#size-cells = <1>;
-
-			ubi@0 {
-				label = "ubi";
-				reg = <0x0 0x79c0000>;
-			};
-		};
-	};
 };
 
 &spi0 {
@@ -122,8 +107,6 @@
 };
 
 &ethernet {
-	compatible = "mediatek,ralink-mt7621-eth";
-	mediatek,switch = <&gsw>;
 	mtd-mac-address = <&factory 0xe000>;
 };
 
