@@ -20,8 +20,9 @@ cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
 # 内核5.4配置32M闪存, 参考https://github.com/coolsnowwolf/lede/issues/5113
 #sed -i '/spi-max-frequency/a\\t\tbroken-flash-reset;' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962.dts
 sed -i 's/<0x50000 0xfb0000>/<0x50000 0x1fb0000>/g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
-sed -i 's/<&gpio/<\&gpio0/g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
-sed -i 's/hc5962/&-nand/g' ./target/linux/ramips/image/mt7621.mk
+sed -i 's/hc5962/&|\\\n\thiwifi,hc5962-spi/g' ./target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+#sed -i 's/<&gpio/<\&gpio0/g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
+#sed -i 's/16064/32128/g' ./target/linux/ramips/image/mt7621.mk
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
 define Device/hiwifi_hc5962-spi
   IMAGE_SIZE := 32128k
@@ -43,42 +44,34 @@ cat >> .config <<EOF
 CONFIG_TARGET_ramips=y
 CONFIG_TARGET_ramips_mt7621=y
 CONFIG_TARGET_ramips_mt7621_DEVICE_hiwifi_hc5962-spi=y
-EOF
-# 常用LuCI插件选择: 添加外面的主题和应用，包是通过diy.sh 脚本进行下载。
-cat >> .config <<EOF
+# 常用LuCI插件选择: 添加外面的主题和应用
+CONFIG_PACKAGE_luci-app-aria2=y
+CONFIG_PACKAGE_webui-aria2=y
+CONFIG_PACKAGE_aria2=y
 CONFIG_PACKAGE_luci-app-wol=n
 CONFIG_PACKAGE_luci-app-upnp=y
 CONFIG_PACKAGE_luci-app-accesscontrol=n
-CONFIG_PACKAGE_luci-app-cifs-mount=y
 CONFIG_PACKAGE_luci-app-filetransfer=y
 CONFIG_PACKAGE_luci-app-unblockmusic=n
 CONFIG_PACKAGE_luci-app-unblockneteasemusic-mini=n
 CONFIG_PACKAGE_luci-app-vsftpd=y
+CONFIG_PACKAGE_luci-app-cifs-mount=y
 CONFIG_PACKAGE_luci-app-vlmcsd=n
 CONFIG_PACKAGE_luci-app-zerotier=n
-EOF
-# 关闭ipv6:
-#cat >> .config <<EOF
-#CONFIG_KERNEL_IPV6=n
-#CONFIG_KERNEL_IPV6_MULTIPLE_TABLES=n
-#CONFIG_KERNEL_IPV6_SUBTREES=n
-#CONFIG_KERNEL_IPV6_MROUTE=n
-#CONFIG_IPV6=n
-#EOF
-# SSR Configuration
-cat >> .config <<EOF
+# SSR Configuration 16M固件取 n, 32M固件取 y
 CONFIG_PACKAGE_luci-app-ssr-plus=y
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_plugin=y
 CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan=y
 CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2=y
-CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
-CONFIG_PACKAGE_luci-app-ssrserver-python=y
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=n
+CONFIG_PACKAGE_luci-app-ssrserver-python=n
 CONFIG_PACKAGE_shadowsocks-libev-ss-local=y
 CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y
 CONFIG_PACKAGE_shadowsocksr-libev-alt=y
+CONFIG_PACKAGE_shadowsocksr-libev-server=y
 CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y
-EOF
 # 常用软件包:
-cat >> .config <<EOF
 CONFIG_PACKAGE_mount-utils=n
 CONFIG_PACKAGE_automount=y
 CONFIG_PACKAGE_kmod-fs-ext4=y
@@ -88,8 +81,7 @@ CONFIG_PACKAGE_screen=y
 CONFIG_PACKAGE_tree=y
 CONFIG_PACKAGE_vim-fuller=y
 CONFIG_PACKAGE_wget=y
-EOF
-# ========================固件定制部分结束========================
+# ===================固件定制部分结束===================
 sed -i 's/^[ \t]*//g' ./.config
 # 修改默认主题
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
