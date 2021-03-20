@@ -33,6 +33,8 @@ endef
 TARGET_DEVICES += hiwifi_hc5962-spi
 EOF
 sed -i 's/^[ \t]*//g' ./target/linux/ramips/image/mt7621.mk
+# 修改默认主题
+sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
 # 
 rm -f ./.config*
 touch ./.config
@@ -56,27 +58,40 @@ CONFIG_PACKAGE_luci-app-vsftpd=y
 CONFIG_PACKAGE_luci-app-cifs-mount=y
 CONFIG_PACKAGE_luci-app-vlmcsd=n
 CONFIG_PACKAGE_luci-app-zerotier=n
+CONFIG_PACKAGE_luci-theme-argon=y
 # passwall Configuration 16M固件取 n, 32M固件取 y
 CONFIG_PACKAGE_luci-app-passwall=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Server=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Server=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_haproxy=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_dns2socks=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_v2ray-plugin=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_simple-obfs=y
+CONFIG_PACKAGE_shadowsocks-libev-ss-server=y
+CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y
+CONFIG_PACKAGE_shadowsocks-libev-ss-local=y
+CONFIG_PACKAGE_shadowsocksr-libev-server=y
 # 常用软件包:
 CONFIG_PACKAGE_mount-utils=n
 CONFIG_PACKAGE_automount=y
+CONFIG_PACKAGE_coreutils-nohup=y
 CONFIG_PACKAGE_kmod-fs-ext4=y
 CONFIG_PACKAGE_curl=y
 CONFIG_PACKAGE_htop=y
+CONFIG_PACKAGE_libmbedtls=y
+CONFIG_PACKAGE_ipt2socks=y
+CONFIG_PACKAGE_ssocks=y
 CONFIG_PACKAGE_screen=y
+CONFIG_PACKAGE_trojan-go=y
 CONFIG_PACKAGE_tree=y
+CONFIG_PACKAGE_unzip=y
 CONFIG_PACKAGE_vim-fuller=y
 CONFIG_PACKAGE_wget=y
 # ===================固件定制部分结束===================
-# 修改默认主题
-sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
 sed -i 's/^[ \t]*//g' ./.config
 make defconfig
