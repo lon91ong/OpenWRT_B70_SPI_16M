@@ -14,14 +14,12 @@ sed -i '/^.*hc5962.*/d' ./target/linux/ramips/mt7621/base-files/lib/upgrade/plat
 #rm -f ./package/system/fstools/files/mount.hotplug
 #cp -f $GITHUB_WORKSPACE/mount.hotplug ./package/system/fstools/files/
 cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
-# 内核版本选4.14
-#sed -i 's/5.4/4.14/g' target/linux/ramips/Makefile
-#sed -i 's/5.4/4.14/g' target/linux/ramips/image/mt7621.mk
 # 内核5.4配置32M闪存, 参考https://github.com/coolsnowwolf/lede/issues/5113
 #sed -i '/spi-max-frequency/a\\t\tbroken-flash-reset;' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962.dts
 sed -i 's/<0x50000 0xfb0000>/<0x50000 0x1fb0000>/g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
 sed -i 's/hc5962/&|\\\n\thiwifi,hc5962-spi/g' ./target/linux/ramips/mt7621/base-files/etc/board.d/02_network
-#sed -i 's/<&gpio/<\&gpio0/g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
+# 下面一行适配内核4.14
+sed -i 's/<&gpio /<\&gpio0 /g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
 #sed -i 's/16064/32128/g' ./target/linux/ramips/image/mt7621.mk
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
 define Device/hiwifi_hc5962-spi
@@ -36,9 +34,7 @@ sed -i 's/^[ \t]*//g' ./target/linux/ramips/image/mt7621.mk
 # 
 rm -f ./.config*
 touch ./.config
-# 
 # ========================固件定制部分========================
-# 
 # 编译极路由B70固件:
 cat >> .config <<EOF
 CONFIG_TARGET_ramips=y
