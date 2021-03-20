@@ -21,6 +21,8 @@ sed -i 's/hc5962/&|\\\n\thiwifi,hc5962-spi/g' ./target/linux/ramips/mt7621/base-
 # 下面一行适配内核4.14
 sed -i 's/<&gpio /<\&gpio0 /g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
 #sed -i 's/16064/32128/g' ./target/linux/ramips/image/mt7621.mk
+# Add a feed source
+#sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
 define Device/hiwifi_hc5962-spi
   IMAGE_SIZE := 32128k
