@@ -28,7 +28,8 @@ define Device/hiwifi_hc5962-spi
   IMAGE_SIZE := 32128k
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5962
-  DEVICE_PACKAGES := mod-mt7603 kmod-mt76x2 kmod-usb3 wpad-openssl
+  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 kmod-sdhci-mt7620 \
+    kmod-usb-ledtrig-usbport wpad-openssl
 endef
 TARGET_DEVICES += hiwifi_hc5962-spi
 EOF
@@ -80,7 +81,7 @@ CONFIG_PACKAGE_tree=y
 CONFIG_PACKAGE_vim-fuller=y
 CONFIG_PACKAGE_wget=y
 # ===================固件定制部分结束===================
-sed -i 's/^[ \t]*//g' ./.config
 # 修改默认主题
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' ./feeds/luci/collections/luci/Makefile
+sed -i 's/^[ \t]*//g' ./.config
 make defconfig
