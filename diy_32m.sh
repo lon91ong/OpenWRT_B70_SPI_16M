@@ -61,6 +61,7 @@ CONFIG_PACKAGE_luci-app-zerotier=n
 CONFIG_PACKAGE_luci-theme-argon=y
 CONFIG_PACKAGE_luci-theme-bootstrap=n
 # passwall Configuration 16M固件取 n, 32M固件取 y
+CONFIG_DEFAULT_luci-app-ssr-plus=n
 CONFIG_PACKAGE_luci-app-passwall=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks=y
 CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Server=y
