@@ -94,6 +94,7 @@ CONFIG_PACKAGE_tree=y
 CONFIG_PACKAGE_unzip=y
 CONFIG_PACKAGE_vim-fuller=y
 CONFIG_PACKAGE_wget=y
+EOF
 # ===================固件定制部分结束===================
 sed -i 's/^[ \t]*//g' ./.config
 make defconfig
