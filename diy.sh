@@ -21,7 +21,7 @@ define Device/hiwifi_hc5962-spi
   IMAGE_SIZE := 16064k
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5962
-  DEVICE_PACKAGES := kmod-mt7603 kmod-mt76x2 kmod-usb3 wpad-openssl
+  DEVICE_PACKAGES := luci-app-mtwifi
 endef
 TARGET_DEVICES += hiwifi_hc5962-spi
 EOF
