@@ -27,7 +27,7 @@ env:
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
   DIY_FEED: diy_feed.sh
-  DIY_SH: diy_32m.sh
+  DIY_SH: diy.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
