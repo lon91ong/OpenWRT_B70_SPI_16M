@@ -4,7 +4,7 @@
 ![GitHub Stars](https://img.shields.io/github/stars/P3TERX/Actions-OpenWrt.svg?style=flat-square&label=Stars&logo=github)
 ![GitHub Forks](https://img.shields.io/github/forks/P3TERX/Actions-OpenWrt.svg?style=flat-square&label=Forks&logo=github)
 
-![芯片图](./images/B70.jpg)
+![芯片图](./images/B70芯片.jpg)
 ### 参考
 
 [利用github action功能，自己给极路由3编译l固件（基于lean）](https://www.right.com.cn/forum/thread-2906191-1-1.html)
