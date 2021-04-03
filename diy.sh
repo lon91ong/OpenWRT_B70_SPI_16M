@@ -21,6 +21,7 @@ sed -i ':a;N;$!ba;s/d-team,newifi-d2/&|\\\n\thiwifi,hc5962-spi/2' ./target/linux
 sed -i 's/<&gpio /<\&gpio0 /g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
 define Device/hiwifi_hc5962-spi
+  $(Device/uimage-lzma-loader)
   IMAGE_SIZE := 16064k
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5962
