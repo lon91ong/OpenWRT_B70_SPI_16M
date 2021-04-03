@@ -14,6 +14,9 @@ sed -i '/^.*hc5962.*/d' target/linux/ramips/mt7621/base-files/lib/upgrade/platfo
 #rm -f ./package/system/fstools/files/mount.hotplug
 #cp -f $GITHUB_WORKSPACE/mount.hotplug ./package/system/fstools/files/
 cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
+# 网络接口适配
+sed -i ':a;N;$!ba;s/hiwifi,hc5962/&|\\\n\t&-spi/1' ./target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+sed -i ':a;N;$!ba;s/d-team,newifi-d2/&|\\\n\thiwifi,hc5962-spi/2' ./target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 # 下面一行适配内核4.14
 sed -i 's/<&gpio /<\&gpio0 /g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
