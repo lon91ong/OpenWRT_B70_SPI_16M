@@ -17,7 +17,9 @@ cp -f $GITHUB_WORKSPACE/mt7621_hiwifi_hc5962-spi.dts ./target/linux/ramips/dts/
 # 内核5.4配置32M闪存, 参考https://github.com/coolsnowwolf/lede/issues/5113
 #sed -i '/spi-max-frequency/a\\t\tbroken-flash-reset;' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962.dts
 sed -i 's/<0x50000 0xfb0000>/<0x50000 0x1fb0000>/g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
-sed -i 's/hc5962/&|\\\n\thiwifi,hc5962-spi/g' ./target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+# 网络接口适配
+sed -i ':a;N;$!ba;s/hiwifi,hc5962/&|\\\n\t&-spi/1' ./target/linux/ramips/mt7621/base-files/etc/board.d/02_network
+sed -i ':a;N;$!ba;s/d-team,newifi-d2/&|\\\n\thiwifi,hc5962-spi/2' ./target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 # 下面一行适配内核4.14
 sed -i 's/<&gpio /<\&gpio0 /g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-spi.dts
 #sed -i 's/16064/32448/g' ./target/linux/ramips/image/mt7621.mk
@@ -25,6 +27,7 @@ sed -i 's/<&gpio /<\&gpio0 /g' ./target/linux/ramips/dts/mt7621_hiwifi_hc5962-sp
 #sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
 cat >> ./target/linux/ramips/image/mt7621.mk <<EOF
 define Device/hiwifi_hc5962-spi
+  $(Device/uimage-lzma-loader)
   IMAGE_SIZE := 32448k
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5962-SPI
